@@ -1,5 +1,15 @@
-//so so lonely
-var app = app || {};
-app.hey = function() {
-  console.log('Hey');
+
+class HelloWorld {
+  constructor(name, purpose) {
+    this.attrs = {
+      name: name,
+      purpose: purpose
+    };
+  }
+  toString() {
+    return 'Hello, world!';
+  }
 }
+var sample = new HelloWorld("James", "party party party");
+console.log(sample.toString());
+console.log(sample.attrs);
