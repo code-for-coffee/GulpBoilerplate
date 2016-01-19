@@ -1,3 +1,5 @@
+var bob = require('./bob');
+bob();
 
 class HelloWorld {
   constructor(name, purpose) {

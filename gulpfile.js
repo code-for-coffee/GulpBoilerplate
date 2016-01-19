@@ -3,6 +3,7 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var watch = require('gulp-watch');
+//var uglify = require('gulp-uglify');
 //gulp.task(nameOfTask, callback);
 
 watch(['./source/*.js'], function() {
