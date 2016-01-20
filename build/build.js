@@ -19030,70 +19030,59 @@ module.exports = require('./lib/React');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var NavBar = React.createClass({
-  displayName: 'NavBar',
+var reactElementExample = require('./reactElements');
 
-  render: function render() {
-    return React.createElement(
-      'nav',
-      null,
-      this.props.appName,
-      React.createElement(
-        'ul',
-        null,
-        React.createElement(
-          'li',
-          null,
-          React.createElement(
-            'a',
-            { href: this.props.home },
-            this.props.home
-          )
-        ),
-        React.createElement(
-          'li',
-          null,
-          React.createElement(
-            'a',
-            { href: this.props.contact },
-            this.props.contact
-          )
-        )
-      )
-    );
-  }
-});
+// Day 1:
+// var NavBar = React.createClass({
+//   render: function() {
+//     return <nav>{this.props.appName}
+//       <ul><li><a href={this.props.home}>{this.props.home}</a></li>
+//       <li><a href={this.props.contact}>{this.props.contact}</a></li>
+//       </ul>
+//     </nav>;
+//   }
+// });
+//
+// var Hello = React.createClass({
+//   render: function() {
+//     return <div>Hello {this.props.name}</div>;
+//   }
+// });
+//
+// var Footer = React.createClass({
+//   render: function() {
+//     return <footer>&copy; 2016 {this.props.author}</footer>;
+//   }
+// });
+//
+// ReactDOM.render(
+//   <NavBar appName="yo" home="home" contact="reachout" />,
+//   document.getElementById('navbar-container')
+// )
+//
+// ReactDOM.render(
+//   <Hello name="World" />,
+//   document.getElementById('container')
+// );
+//
+// ReactDOM.render(
+//   <Footer author="codeforcoffee" />,
+//   document.getElementById('footer-container')
+// )
 
-var Hello = React.createClass({
-  displayName: 'Hello',
+},{"./reactElements":160,"react":158,"react-dom":29}],160:[function(require,module,exports){
+'use strict';
 
-  render: function render() {
-    return React.createElement(
-      'div',
-      null,
-      'Hello ',
-      this.props.name
-    );
-  }
-});
-
-var Footer = React.createClass({
-  displayName: 'Footer',
-
-  render: function render() {
-    return React.createElement(
-      'footer',
-      null,
-      '© 2016 ',
-      this.props.author
-    );
-  }
-});
-
-ReactDOM.render(React.createElement(NavBar, { appName: 'yo', home: 'home', contact: 'reachout' }), document.getElementById('navbar-container'));
-
-ReactDOM.render(React.createElement(Hello, { name: 'World' }), document.getElementById('container'));
-
-ReactDOM.render(React.createElement(Footer, { author: 'codeforcoffee' }), document.getElementById('footer-container'));
+var React = require('react');
+var ReactDOM = require('react-dom');
+// allow us to define a basic element
+// var reactElement = React.createElement(type, props, children);
+var reactElement = React.createElement('h1', { className: 'header' });
+// is what jsx compiles to
+// for:
+// <h1 className="header" />
+// render as usual
+ReactDOM.render(reactElement, document.getElementById('some-where'));
+// for more documentation: https://facebook.github.io/react/docs/jsx-in-depth.html
 
 },{"react":158,"react-dom":29}]},{},[159]);
