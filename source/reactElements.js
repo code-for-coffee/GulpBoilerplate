@@ -9,3 +9,10 @@ var reactElement = React.createElement('h1', { className: 'header' });
 // render as usual
 ReactDOM.render(reactElement, document.getElementById('some-where'));
 // for more documentation: https://facebook.github.io/react/docs/jsx-in-depth.html
+
+//
+var Nav;
+// Input (JSX):
+var app = <Nav color="blue" />;
+// Output (JS):
+var app = React.createElement(Nav, {color:"blue"});

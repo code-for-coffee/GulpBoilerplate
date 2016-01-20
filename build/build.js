@@ -19030,21 +19030,48 @@ module.exports = require('./lib/React');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var reactElementExample = require('./reactElements');
+//var reactElementExample = require('./reactElements');
+var crudForm = require('./formComponent');
 
-},{"./reactElements":160,"react":158,"react-dom":29}],160:[function(require,module,exports){
+},{"./formComponent":160,"react":158,"react-dom":29}],160:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-// allow us to define a basic element
-// var reactElement = React.createElement(type, props, children);
-var reactElement = React.createElement('h1', { className: 'header' });
-// is what jsx compiles to
-// for:
-// <h1 className="header" />
-// render as usual
-ReactDOM.render(reactElement, document.getElementById('some-where'));
-// for more documentation: https://facebook.github.io/react/docs/jsx-in-depth.html
+
+var IntegerInput = React.createClass({
+  displayName: 'IntegerInput',
+
+  getInitialState: function getInitialState() {
+    return { value: 'Hello!' };
+  },
+  handleChange: function handleChange(event) {
+    var isValid = this.validate(event.target.value);
+    var elementClassName;
+    // commands before setting state
+    if (isValid) {
+      elementClassName = "success";
+    } else {
+      elementClassName = "error";
+    }
+    console.log(isValid);
+    console.log('My internal state has been changed!');
+    this.setState({ value: event.target.value, cssClass: elementClassName });
+  },
+  validate: function validate(val) {
+    console.log(val);
+    if (Number.isInteger(parseInt(val)) == false) {
+      return false;
+    }
+    return true;
+  },
+  render: function render() {
+    var value = this.state.value;
+    var cssClass = this.state.cssClass;
+    return React.createElement('input', { type: 'number', className: cssClass, value: value, onChange: this.handleChange });
+  }
+});
+
+ReactDOM.render(React.createElement(IntegerInput, null), document.getElementById('crud-form'));
 
 },{"react":158,"react-dom":29}]},{},[159]);
