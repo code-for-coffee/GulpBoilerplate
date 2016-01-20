@@ -1,33 +1,19 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var Backbone = require('backbone');
-var disp = require('./disp');
-// var Chirp = React.createClass({
-//   render: function() {
-//     return (
-//       <article className="chirp">
-//         <h2 className="chirpAuthor">
-//           {this.props.author}
-//         </h2>
-//         {this.props.children}
-//       </article>
-//     );
-//   }
-// });
+var backbone = require('backbone');
+
+var input = require('./IntegerInput');
+
+//jsx element = reactElement
+//jsx converts html style syntax into something called a reactElement
+
+//<h1 className="emphasis" />
+// compiles to:
+// var element = React.createElement('h1', { className: 'emphasis '});
 //
-// var ChirpList = React.createClass({
-//   render: function() {
-//     return (
-//       <article>
-//         <Chirp author="James">chirpedy chirp chirp</Chirp>
-//         <Chirp author="Magda">meow tuna guys please</Chirp>
-//       </article>
-//     )
-//   }
-// });
-//
+// // ReactDOM.render(<h1 className="emphasis" />, document.getElementById('react-element'));
 // ReactDOM.render(
-//   <ChirpList />,
-//   document.getElementById('chirps')
+//   element,
+//   document.getElementById('react-element')
 // );

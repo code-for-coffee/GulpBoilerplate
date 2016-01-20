@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "backbone": "^1.2.3",
+    "bcrypt": "^0.8.5",
     "jquery": "^2.2.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6"

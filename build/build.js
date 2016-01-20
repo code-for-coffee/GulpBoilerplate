@@ -32311,106 +32311,107 @@ module.exports = require('./lib/React');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var Backbone = require('backbone');
-var disp = require('./disp');
-// var Chirp = React.createClass({
-//   render: function() {
-//     return (
-//       <article className="chirp">
-//         <h2 className="chirpAuthor">
-//           {this.props.author}
-//         </h2>
-//         {this.props.children}
-//       </article>
-//     );
-//   }
-// });
-//
-// var ChirpList = React.createClass({
-//   render: function() {
-//     return (
-//       <article>
-//         <Chirp author="James">chirpedy chirp chirp</Chirp>
-//         <Chirp author="Magda">meow tuna guys please</Chirp>
-//       </article>
-//     )
-//   }
-// });
-//
-// ReactDOM.render(
-//   <ChirpList />,
-//   document.getElementById('chirps')
-// );
 
-},{"./disp":163,"backbone":1,"jquery":29,"react":160,"react-dom":31}],163:[function(require,module,exports){
+// basic react outline
+var IntegerInput = React.createClass({
+  displayName: 'IntegerInput',
+
+  // runs first! we want to give our component 'state'
+  getInitialState: function getInitialState() {
+    // set this.state.value = 42
+    // this.state =sorta backbone.model.attributes
+    return { value: 42, cssClass: 'form-control' };
+  },
+  handleChange: function handleChange(event) {
+    var isInputValid = this.validate(event.target.value);
+    var validationClass; // css validation class
+    if (isInputValid) {
+      validationClass = 'success form-control';
+    } else {
+      validationClass = 'error form-control';
+    }
+    this.setState({ cssClass: validationClass, value: event.target.value });
+  },
+  validate: function validate(val) {
+    if (Number.isInteger(parseInt(val)) == false) {
+      return false;
+    }
+    return true;
+  },
+  render: function render() {
+    var value = this.state.value;
+    var cssClass = this.state.cssClass;
+    return React.createElement('input', { type: 'number', className: cssClass, value: value, onChange: this.handleChange });
+  }
+});
+
+var PasswordInput = React.createClass({
+  displayName: 'PasswordInput',
+
+  // runs first! we want to give our component 'state'
+  getInitialState: function getInitialState() {
+    // set this.state.value = 42
+    // this.state =sorta backbone.model.attributes
+    return { value: '', cssClass: 'form-control' };
+  },
+  handleChange: function handleChange(event) {
+    var isInputValid = this.validate(event.target.value);
+    var validationClass; // css validation class
+    if (isInputValid) {
+      validationClass = 'success form-control';
+    } else {
+      validationClass = 'error form-control';
+    }
+    this.setState({ cssClass: validationClass, value: event.target.value });
+  },
+  validate: function validate(val) {
+    // require 10 character long password
+    if (val.length < 10) {
+      return false;
+    }
+    return true;
+  },
+  render: function render() {
+    var value = this.state.value;
+    var cssClass = this.state.cssClass;
+    return React.createElement(
+      'div',
+      { 'class': 'form-group has-success' },
+      React.createElement(
+        'label',
+        { 'class': 'control-label', 'for': 'inputSuccess1' },
+        'Your Password'
+      ),
+      React.createElement('input', { type: 'password', className: cssClass, value: value, onChange: this.handleChange })
+    );
+  }
+});
+
+ReactDOM.render(React.createElement(IntegerInput, null), document.getElementById('react-element'));
+
+ReactDOM.render(React.createElement(PasswordInput, null), document.getElementById('react-element-pass'));
+
+},{"jquery":29,"react":160,"react-dom":31}],163:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var Backbone = require('backbone');
+var backbone = require('backbone');
 
-var Dispensary = React.createClass({
-  displayName: 'Dispensary',
+var input = require('./IntegerInput');
 
-  render: function render() {
-    return React.createElement(
-      'article',
-      { className: 'item' },
-      React.createElement(
-        'h2',
-        null,
-        this.props.name,
-        ' in ',
-        this.props.city
-      ),
-      React.createElement(
-        'em',
-        null,
-        'Phone:'
-      ),
-      ' ',
-      this.props.phone
-    );
-  }
-});
+//jsx element = reactElement
+//jsx converts html style syntax into something called a reactElement
 
-var DispensaryList = React.createClass({
-  displayName: 'DispensaryList',
+//<h1 className="emphasis" />
+// compiles to:
+// var element = React.createElement('h1', { className: 'emphasis '});
+//
+// // ReactDOM.render(<h1 className="emphasis" />, document.getElementById('react-element'));
+// ReactDOM.render(
+//   element,
+//   document.getElementById('react-element')
+// );
 
-  getInitialState: function getInitialState() {
-    console.log('set initial state');
-    return { data: [] };
-  },
-  componentDidMount: function componentDidMount() {
-    console.log('component mounted');
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function (data) {
-        this.setState({ data: data });
-      }.bind(this),
-      error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  render: function render() {
-    console.log(this.props);
-    console.log(this.state.data);
-    var dispensaryNodes = this.state.data.map(function (dispensary) {
-      return React.createElement(Dispensary, { key: dispensary.id, name: dispensary.name, city: dispensary.city, phone: dispensary.phone });
-    });
-    console.log(dispensaryNodes);
-    return React.createElement(
-      'div',
-      null,
-      dispensaryNodes
-    );
-  }
-});
-
-ReactDOM.render(React.createElement(DispensaryList, { url: 'http://illinoisdispensaries.space/api-v1' }), document.getElementById('chirps'));
-
-},{"backbone":1,"jquery":29,"react":160,"react-dom":31}]},{},[162]);
+},{"./IntegerInput":162,"backbone":1,"jquery":29,"react":160,"react-dom":31}]},{},[163]);
