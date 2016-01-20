@@ -1,17 +1,39 @@
-var bob = require('./bob');
-bob();
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-class HelloWorld {
-  constructor(name, purpose) {
-    this.attrs = {
-      name: name,
-      purpose: purpose
-    };
+var NavBar = React.createClass({
+  render: function() {
+    return <nav>{this.props.appName}
+      <ul><li><a href={this.props.home}>{this.props.home}</a></li>
+      <li><a href={this.props.contact}>{this.props.contact}</a></li>
+      </ul>
+    </nav>;
   }
-  toString() {
-    return 'Hello, world!';
+});
+
+var Hello = React.createClass({
+  render: function() {
+    return <div>Hello {this.props.name}</div>;
   }
-}
-var sample = new HelloWorld("James", "party party party");
-console.log(sample.toString());
-console.log(sample.attrs);
+});
+
+var Footer = React.createClass({
+  render: function() {
+    return <footer>&copy; 2016 {this.props.author}</footer>;
+  }
+});
+
+ReactDOM.render(
+  <NavBar appName="yo" home="home" contact="reachout" />,
+  document.getElementById('navbar-container')
+)
+
+ReactDOM.render(
+  <Hello name="World" />,
+  document.getElementById('container')
+);
+
+ReactDOM.render(
+  <Footer author="codeforcoffee" />,
+  document.getElementById('footer-container')
+)
